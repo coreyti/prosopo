@@ -1,0 +1,48 @@
+<html>
+<head>
+  <title>prosopo</title>
+  <script type='text/javascript' src='../javascripts/vendor/jquery.js'></script>
+  <script type='text/javascript' src='../javascripts/application.js'></script>
+  <link rel='stylesheet' type='text/css' href='../stylesheets/application.css' />
+</head>
+
+<body>
+  <div id='genealogy' class='source'>
+    <h3>persons</h3>
+
+    <ul rel='person'>
+      <li id='person_1'>
+        <dl>
+          <dt>Given Name</dt>
+          <dd>Corey</dd>
+          <dt>Surname</dt>
+          <dd>Innis</dd>
+        </dl>
+      </li>
+      <li id='person_2'>
+        <dl>
+          <dt>Given Name</dt>
+          <dd>Danica</dd>
+          <dt>Surname</dt>
+          <dd>MacAvoy</dd>
+        </dl>
+      </li>
+    </ul>
+    
+    <h3>relationships</h3>
+
+    <ul rel='relationship'>
+      <li class='peer casual'>
+        <dl>
+          <dt>Label</dt>
+          <dd>Partnership</dd>
+          <dt>Person</dt>
+          <dd class='person' rel="person_1">Corey Innis</dd>
+          <dt>Person</dt>
+          <dd class='person' rel="person_2">Danica MacAvoy</dd>
+        </dl>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
