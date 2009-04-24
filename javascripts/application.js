@@ -48,6 +48,9 @@ $.extend(Prosopo.prototype, {
   render_positions: function() {
     var self = this;
 
+    var peer_left  = $('<div class="left"></div>');
+    var peer_right = $('<div class="right"></div>');
+
     $(this.source.find('ul[rel=relationship] > li.peer')).each(function() {
       var top;
       var peer_set = [];
@@ -68,16 +71,21 @@ $.extend(Prosopo.prototype, {
         var chart_center = self.source.width() / 2;
         // var peer_width  = peer.width();
 
+        var content = peer.output.remove();
+
         if(i % 2 == 0) {
-          peer.output.css({ position: 'absolute', top: top, right: chart_center, 'z-index': 10 });
+          peer_left.append(content);
         }
         else {
-          peer.output.css({ position: 'absolute', top: top, left:  chart_center, 'z-index': 10 });
+          peer_right.append(content);
         }
       });
 
       self.peers.push(peer_set);
     });
+
+    self.output.append(peer_left);
+    self.output.append(peer_right);
   },
 
   render_relationships: function() {
@@ -90,15 +98,15 @@ $.extend(Prosopo.prototype, {
 
       $.each(this, function() {
         var center = this.center();
-      
+
         if(y == undefined) {
           y = center.y;
         }
-        
+
         left  = (left  == undefined) ? center.x : (left  < center.x ? left  : center.x);
         right = (right == undefined) ? center.x : (right > center.x ? right : center.x);
       });
-      
+
       var relationship = $('<div class="relationship" />');
           relationship.css({ position: 'absolute', top: (y - 10), left: (left - 5), height: 1, width: (right - left), background: '#999' });
 

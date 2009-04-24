@@ -54,4 +54,25 @@ div[class='prosopo:person'] dd {
   padding       : 0;
 }
 
+
+
+div.left {
+  width: 50%;
+  float: left;
+}
+
+div.left > div {
+  float: right;
+}
+
+div.right {
+  width: 50%;
+  float: right;
+}
+
+div.right > div {
+  float: left;
+}
+
+
 /* ---------------------------------------------------------------------------*/
