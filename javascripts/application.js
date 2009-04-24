@@ -100,7 +100,7 @@ $.extend(Prosopo.prototype, {
       });
       
       var relationship = $('<div class="relationship" />');
-          relationship.css({ position: 'absolute', top: (y - 10), left: (left - 5), right: right, height: 1, width: (right - left), background: '#999' });
+          relationship.css({ position: 'absolute', top: (y - 10), left: (left - 5), height: 1, width: (right - left), background: '#999' });
 
       $('body').append(relationship);
     });
