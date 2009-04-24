@@ -20,6 +20,7 @@ $.extend(Prosopo, {
 $.extend(Prosopo.prototype, {
   initialize: function() {
     this.persons = {};
+    this.peers   = [];
     this.render();
   },
 
@@ -30,7 +31,7 @@ $.extend(Prosopo.prototype, {
 
     this.render_persons();
     this.render_positions();
-    // this.render_relationships();
+    this.render_relationships();
   },
 
   render_persons: function() {
@@ -49,31 +50,59 @@ $.extend(Prosopo.prototype, {
 
     $(this.source.find('ul[rel=relationship] > li.peer')).each(function() {
       var top;
-      var peers = [];
+      var peer_set = [];
 
       $.each($(this).find('dt:contains(Person)').next('dd'), function() {
         var person_id  = $(this).attr('rel');
         var person_box = self.persons[person_id];
 
-        peers.push(person_box);
+        peer_set.push(person_box);
 
         var box_top = person_box.output.position().top;
         top = (top != undefined) ? (top > box_top ? box_top : top) : box_top;
       });
 
-      $.each(peers, function(i) {
+      $.each(peer_set, function(i) {
         var peer = this;
 
         var chart_center = self.source.width() / 2;
         // var peer_width  = peer.width();
 
         if(i % 2 == 0) {
-          peer.output.css({ position: 'absolute', top: top, right: chart_center });
+          peer.output.css({ position: 'absolute', top: top, right: chart_center, 'z-index': 10 });
         }
         else {
-          peer.output.css({ position: 'absolute', top: top, left: chart_center });
+          peer.output.css({ position: 'absolute', top: top, left:  chart_center, 'z-index': 10 });
         }
       });
+
+      self.peers.push(peer_set);
+    });
+  },
+
+  render_relationships: function() {
+    var self = this;
+
+    $.each(this.peers, function() {
+      var left;
+      var right;
+      var y;
+
+      $.each(this, function() {
+        var center = this.center();
+      
+        if(y == undefined) {
+          y = center.y;
+        }
+        
+        left  = (left  == undefined) ? center.x : (left  < center.x ? left  : center.x);
+        right = (right == undefined) ? center.x : (right > center.x ? right : center.x);
+      });
+      
+      var relationship = $('<div class="relationship" />');
+          relationship.css({ position: 'absolute', top: (y - 10), left: (left - 5), right: right, height: 1, width: (right - left), background: '#999' });
+
+      $('body').append(relationship);
     });
   }
 });
