@@ -23,7 +23,7 @@ div.source dt {
 
 /* ---------------------------------------------------------------------------*/
 
-div[class='prosopo:graph'] {
+div[class='prosopo:chart'] {
   border        : 1px solid #CCC;
   background    : #EEF;
   position      : relative;
